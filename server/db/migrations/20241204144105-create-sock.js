@@ -1,51 +1,44 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Socks", {
+    await queryInterface.createTable('Socks', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      imgId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Images",
-          key: "id",
-        },
+      image: {
+        type: Sequelize.STRING,
       },
-      patternId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Patterns",
-          key: "id",
-        },
+      color: {
+        type: Sequelize.STRING,
+      },
+      logo: {
+        type: Sequelize.STRING,
       },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "Users",
-          key: "id",
+          model: 'Users',
+          key: 'id',
         },
-      },
-      status: {
-        type: Sequelize.STRING,
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Socks");
+    await queryInterface.dropTable('Socks');
   },
 };

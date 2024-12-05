@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa';
 
 export default function NavBar({ user, logoutHandler }) {
   return (
@@ -13,7 +14,15 @@ export default function NavBar({ user, logoutHandler }) {
           <NavLink to="/" className="nav-link">
             Главная
           </NavLink>
+          <NavLink to="/generate" className="nav-link">
+            Конструктор
+          </NavLink>
         </Nav>
+        {user.data && (
+          <NavLink to={`/cart`} className="nav-link">
+            <FaShoppingCart size={24} />
+          </NavLink>
+        )}
         <Nav>
           {!user.data && (
             <>
@@ -29,7 +38,11 @@ export default function NavBar({ user, logoutHandler }) {
               </NavLink>
             </>
           )}
-
+          {user.data && (
+            <NavLink to={`/cart`} className="nav-link">
+              <FaShoppingCart size={24} />
+            </NavLink>
+          )}
           <span className="nav-link">
             {user.data ? user.data.name : 'Гость'}
           </span>
