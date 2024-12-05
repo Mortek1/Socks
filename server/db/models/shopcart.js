@@ -1,4 +1,4 @@
-const { Model } = require("sequelize");
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class ShopCart extends Model {
@@ -7,8 +7,9 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+    static associate({ User, Sock }) {
+      this.belongsTo(User, { foreignKey: 'userId' });
+      this.belongsTo(Sock, { foreignKey: 'sockId' });
     }
   }
   ShopCart.init(
@@ -18,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "ShopCart",
+      modelName: 'ShopCart',
     }
   );
   return ShopCart;

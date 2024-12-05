@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
   Sock.init(
     {
       imgId: DataTypes.INTEGER,
-      patternId: DataTypes.INTEGER,
       userId: DataTypes.INTEGER,
       status: DataTypes.STRING,
     },
