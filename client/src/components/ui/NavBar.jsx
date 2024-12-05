@@ -33,6 +33,9 @@ export default function NavBar({ user, logoutHandler }) {
                 Регистрация
               </NavLink>
               <span className="nav-link">|</span>
+              <NavLink to="/favorites" className="nav-link">
+                Избранное
+              </NavLink>
             </>
           )}
           {user.data && (
