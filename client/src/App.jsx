@@ -5,6 +5,7 @@ import MainPage from './components/pages/MainPage';
 import AccountLoginPage from './components/pages/AccountLoginPage';
 import AccountNewPage from './components/pages/AccountNewPage';
 import useUser from './hooks/useUser';
+import GeneratePage from './components/pages/GeneratePage/GeneratePage';
 
 function App() {
   const { logoutHandler, signInHandler, signUpHandler, user } = useUser();
@@ -14,6 +15,10 @@ function App() {
       path: '/',
       element: <Layout user={user} logoutHandler={logoutHandler}  />,
       children: [
+        {
+          path: '/generate',
+          element: <GeneratePage user={user} />,
+        },
         {
           path: '/',
           element: <MainPage user={user} />,

@@ -13,5 +13,4 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/account/', accountRouter);
 app.use('/api/tokens/', tokensRouter);
-
 module.exports = app;
