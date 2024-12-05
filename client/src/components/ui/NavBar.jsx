@@ -4,10 +4,11 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa';
 
 export default function NavBar({ user, logoutHandler }) {
   return (
-    <Navbar bg="dark" variant="dark"  className='wm-100'>
+    <Navbar bg="dark" variant="dark" className="wm-100">
       <Container fluid>
         <Nav className="me-auto">
           <NavLink to="/" className="nav-link">
@@ -17,6 +18,11 @@ export default function NavBar({ user, logoutHandler }) {
             Конструктор
           </NavLink>
         </Nav>
+        {user.data && (
+          <NavLink to={`/cart`} className="nav-link">
+            <FaShoppingCart size={24} />
+          </NavLink>
+        )}
         <Nav>
           {!user.data && (
             <>
@@ -29,13 +35,21 @@ export default function NavBar({ user, logoutHandler }) {
               <span className="nav-link">|</span>
             </>
           )}
-
+          {user.data && (
+            <NavLink to={`/cart`} className="nav-link">
+              <FaShoppingCart size={24} />
+            </NavLink>
+          )}
           <span className="nav-link">
             {user.data ? user.data.name : 'Гость'}
           </span>
           {user.data && (
             <span className="nav-link">
-              <Button onClick={logoutHandler} variant="outline-danger" size="sm">
+              <Button
+                onClick={logoutHandler}
+                variant="outline-danger"
+                size="sm"
+              >
                 Выйти
               </Button>
             </span>
@@ -43,6 +57,5 @@ export default function NavBar({ user, logoutHandler }) {
         </Nav>
       </Container>
     </Navbar>
-    
   );
 }

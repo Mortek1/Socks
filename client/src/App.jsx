@@ -5,6 +5,7 @@ import MainPage from './components/pages/MainPage';
 import AccountLoginPage from './components/pages/AccountLoginPage';
 import AccountNewPage from './components/pages/AccountNewPage';
 import useUser from './hooks/useUser';
+import CartPage from './components/pages/CartPage';
 import GeneratePage from './components/pages/GeneratePage/GeneratePage';
 
 function App() {
@@ -22,6 +23,10 @@ function App() {
         {
           path: '/',
           element: <MainPage user={user} />,
+        },
+        {
+          path: "/cart",
+          element: <CartPage user={user} />
         },
         {
           element: <ProtectedRouter isAllowed={user.status !== 'logged'} />,
