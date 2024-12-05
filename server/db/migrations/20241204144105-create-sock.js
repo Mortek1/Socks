@@ -8,22 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      imgId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Images',
-          key: 'id',
-        },
-        onDelete: 'CASCADE',
+      image: {
+        type: Sequelize.STRING,
       },
-      colorId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Colors',
-          key: 'id',
-        },
-        onDelete: 'CASCADE',
+      color: {
+        type: Sequelize.STRING,
+      },
+      logo: {
+        type: Sequelize.STRING,
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -33,9 +25,6 @@ module.exports = {
           key: 'id',
         },
         onDelete: 'CASCADE',
-      },
-      status: {
-        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

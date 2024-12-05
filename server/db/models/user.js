@@ -1,4 +1,4 @@
-const { Model } = require("sequelize");
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ Sock }) {
       // define association here
-      this.hasMany(Sock, { foreignKey: "userId" });
+      this.hasMany(Sock, { foreignKey: 'userId' });
     }
   }
   User.init(
@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "User",
-    }
+      modelName: 'User',
+    },
   );
   return User;
 };
