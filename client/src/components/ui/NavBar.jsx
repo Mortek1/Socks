@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function NavBar({ user, logoutHandler }) {
   return (
-    <Navbar bg="dark" variant="dark"  className='wm-100'>
+    <Navbar bg="dark" variant="dark" className="wm-100">
       <Container fluid>
         <Nav className="me-auto">
           <NavLink to="/" className="nav-link">
@@ -24,6 +24,9 @@ export default function NavBar({ user, logoutHandler }) {
                 Регистрация
               </NavLink>
               <span className="nav-link">|</span>
+              <NavLink to="/favorites" className="nav-link">
+                Избранное
+              </NavLink>
             </>
           )}
 
@@ -32,7 +35,11 @@ export default function NavBar({ user, logoutHandler }) {
           </span>
           {user.data && (
             <span className="nav-link">
-              <Button onClick={logoutHandler} variant="outline-danger" size="sm">
+              <Button
+                onClick={logoutHandler}
+                variant="outline-danger"
+                size="sm"
+              >
                 Выйти
               </Button>
             </span>
@@ -40,6 +47,5 @@ export default function NavBar({ user, logoutHandler }) {
         </Nav>
       </Container>
     </Navbar>
-    
   );
 }

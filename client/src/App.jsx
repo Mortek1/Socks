@@ -5,6 +5,7 @@ import MainPage from './components/pages/MainPage';
 import AccountLoginPage from './components/pages/AccountLoginPage';
 import AccountNewPage from './components/pages/AccountNewPage';
 import useUser from './hooks/useUser';
+import FavoritesPage from './components/pages/FavoritePage';
 
 function App() {
   const { logoutHandler, signInHandler, signUpHandler, user } = useUser();
@@ -29,6 +30,10 @@ function App() {
               path: '/account/login',
               element: <AccountLoginPage signInHandler={signInHandler} />,
             },
+            {
+              path: '/favorites',
+              element: <FavoritesPage user={user} />
+            }
           ],
         },
       ],
