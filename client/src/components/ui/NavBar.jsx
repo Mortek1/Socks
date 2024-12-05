@@ -14,6 +14,9 @@ export default function NavBar({ user, logoutHandler }) {
           <NavLink to="/" className="nav-link">
             Главная
           </NavLink>
+          <NavLink to="/generate" className="nav-link">
+            Конструктор
+          </NavLink>
         </Nav>
         {user.data && (
           <NavLink to={`/cart`} className="nav-link">
