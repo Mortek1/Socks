@@ -23,6 +23,23 @@ module.exports = {
       ],
       {}
     );
+    await queryInterface.bulkInsert(
+      'Images',
+      [
+        {
+          imgUrl: 'https://www.pngegg.com/en/png-bmrqk',
+        },
+        {
+          imgUrl:
+            'https://r2.erweima.ai/imgcompressed/compressed_864c4b229772ff261289eda2c426ed0a.webp',
+        },
+        {
+          imgUrl:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrLtHD6aNtT69T_qpxGTWLP_8CfCHKaXhHBw&s',
+        },
+      ],
+      {}
+    );
   },
 
   async down(queryInterface, Sequelize) {

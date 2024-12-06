@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/account/', accountRouter);
 app.use('/api/tokens/', tokensRouter);
-app.use('/api/carts/', cartRouter)
-app.use('/api/generate/', generateRouter)
-app.use('/api/favorites/', favoriteRouter);
+app.use('/api/carts', cartRouter)
+app.use('/api/generate', generateRouter)
+app.use('/api/favorites', favoriteRouter);
 
 module.exports = app;

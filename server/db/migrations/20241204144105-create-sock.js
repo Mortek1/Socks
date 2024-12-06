@@ -1,3 +1,4 @@
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Socks', {
@@ -12,11 +13,9 @@ module.exports = {
       },
       color: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       logo: {
-        type: Sequelize.TEXT,
-        // allowNull: false,
+        type: Sequelize.STRING,
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -39,7 +38,7 @@ module.exports = {
       },
     });
   },
-  async down(queryInterface) {
+  async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Socks');
   },
 };

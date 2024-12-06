@@ -1,15 +1,14 @@
-import { Col } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import img from '../../../public/SOCKS.png';
-import texturaSock from '../pages/GeneratePage/texturaSock.avif'
 
-function FavoriteCard({ favorite }) {
+function FavoriteCard() {
   const handleShare = () => {
     const shareData = {
       title: 'Card Title',
-      text: 'Описание карточки, которой вы хотите поделиться.',
-      url: img,
+      text: 'Описание карточки, которую вы хотите поделиться.',
+      url: img, // Ссылка на изображение или URL страницы
     };
 
     if (navigator.share) {
@@ -23,28 +22,9 @@ function FavoriteCard({ favorite }) {
   };
 
   return (
-    <Col xs={3}>
-      <Card style={{ width: '18rem'}}>
-  
-        <Card.Img  src={img} style={{
-          // position: 'absolute',
-          zIndex: 2,
-          backgroundColor: favorite.color,
-          }}/>
-        <Card.Img  src={texturaSock} style={{
-          position: 'absolute',
-          zIndex: 1,
-        }}/>
-        <Card.Img  src={img} src={favorite.logo} style={{
-          position: 'absolute',
-          zIndex: 3,
-          width: '40px',
-                objectFit: 'cover',
-                borderRadius: '50%',
-                marginLeft: '160px',
-                marginTop: '265px',
-        }}/>
-
+    <Col xs={7}>
+      <Card style={{ width: '18rem' }}>
+        <Card.Img variant="top" src={img} />
         <Card.Body>
           <Card.Title>Card Title</Card.Title>
           <Card.Text>

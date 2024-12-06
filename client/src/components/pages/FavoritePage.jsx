@@ -1,15 +1,15 @@
 import { Row } from 'react-bootstrap';
+import FavoritesCardsList from '../ui/FavoritesCardsList'
 import FavoriteCard from '../ui/FavoriteCard';
-import useFavoriteSocks from '../../hooks/useFavoriteSocks';
 
 export default function FavoritesPage({ user }) {
-  const favorites = useFavoriteSocks();
-
   return (
     <Row>
-      {favorites.map((favorite) => (
-        <FavoriteCard key={favorite.id} favorite={favorite} />
-      ))}
+        <FavoriteCard/> 
     </Row>
-  );
+//     <main>
+//       <FavoritesCardsList user={user} />
+//     </main>
+
+ );
 }
