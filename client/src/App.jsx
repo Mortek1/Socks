@@ -26,8 +26,12 @@ function App() {
           element: <MainPage user={user} />,
         },
         {
-          path: "/cart",
+          path: "/carts",
           element: <CartPage user={user} />
+        },
+        {
+          path: '/favorites',
+          element: <FavoritesPage user={user} />
         },
         {
           element: <ProtectedRouter isAllowed={user.status !== 'logged'} />,
@@ -40,10 +44,7 @@ function App() {
               path: '/account/login',
               element: <AccountLoginPage signInHandler={signInHandler} />,
             },
-            {
-              path: '/favorites',
-              element: <FavoritesPage user={user} />
-            }
+
           ],
         },
       ],

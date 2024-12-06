@@ -1,41 +1,42 @@
 const express = require('express');
-const { Favorite } = require('../../db/models');
+const { Sock } = require('../../db/models');
 
 const favoriteRouter = express.Router();
 
-favoriteRouter.get('/favorites', async (req, res) => {
+favoriteRouter.get('/', async (req, res) => {
   try {
-    const favorites = await Favorite.findAll();
-    res.json(favorites);
+    const socks = await Sock.findAll();
+    res.json(socks);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-favoriteRouter.post('/favorites', async (req, res) => {
-  const favorite = new Favorite({
-    name: req.body.name,
-    price: req.body.price,
+favoriteRouter.post('/', async (req, res) => {
+  const socks = new Sock({
+    color: req.body.color,
+    userId: req.body.userId,
+    logo: req.body.logo,
   });
 
   try {
-    const newFavorite = await favorite.save();
-    res.status(201).json(newFavorite);
+    const newSock = await socks.save();
+    res.status(201).json(newSock);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
 
-favoriteRouter.delete('/favorites/:id', async (req, res) => {
+favoriteRouter.delete('/:id', async (req, res) => {
   try {
-    const favorite = await Favorite.findById(req.params.id);
-    if (!favorite) return res.status(404).json({ message: 'Товар не найден' });
+    const socks = await Sock.findById(req.params.id);
+    if (!socks) return res.status(404).json({ message: 'Товар не найден' });
 
-    await favorite.remove();
+    await socks.remove();
     res.json({ message: 'Товар удален' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-module.exports = favoriteRouter;
+module.exports = favoriteRouter; 
