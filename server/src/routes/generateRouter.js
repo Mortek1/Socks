@@ -22,8 +22,17 @@
 
 // module.exports = generatorRouter;
 
+
+
+
+
+
+
+
+
+
 const express = require('express');
-const { Sock } = require('../../db/models');
+const { Sock, Cart, Favorite } = require('../../db/models');
 
 const generatorRouter = express.Router();
 
@@ -34,13 +43,41 @@ generatorRouter.post('/favorites', async (req, res) => {
     if (!userId || !color || !logo) {
       return res.status(400).json({ message: 'Все поля должны быть заполнены' });
     }
-    const newFavoriteSock = await Sock.create({ userId, color, logo });
-    res.status(201).json(newFavoriteSock);
+    const newSock = await Sock.create({ userId, color, logo });
+    const newFavorite = await Favorite.create({sockId: newSock.id, userId});
+    res.status(201).json(newFavorite);
   } catch (error) {
     console.error('Ошибка при добавлении в избранное:', error);
     res.status(500).json({ message: 'Ошибка сервера' });
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+// временно убрали
+
+// generatorRouter.post('/favorites', async (req, res) => {
+//   try {
+//     const { userId, color, logo } = req.body;
+
+//     if (!userId || !color || !logo) {
+//       return res.status(400).json({ message: 'Все поля должны быть заполнены' });
+//     }
+//     const newFavoriteSock = await Sock.create({ userId, color, logo });
+//     res.status(201).json(newFavoriteSock);
+//   } catch (error) {
+//     console.error('Ошибка при добавлении в избранное:', error);
+//     res.status(500).json({ message: 'Ошибка сервера' });
+//   }
+// });
 
 // Добавление носков в корзину
 generatorRouter.post('/carts', async (req, res) => {
