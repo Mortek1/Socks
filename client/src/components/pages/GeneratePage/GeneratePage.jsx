@@ -56,7 +56,7 @@ export default function GeneratePage({ user }) {
       <div style={{ position: 'relative', width: '400px', height: '500px' }}>
         <div>
           <img
-            style={{ zIndex: '2', position: 'absolute', width: '100%', height: '100%', opacity: '30%' }}
+            style={{ zIndex: '2', position: 'absolute', width: '100%', height: '100%', opacity: '30%', borderRadius: '30px' }}
             src={texturaSock}
             alt="Текстура носка"
           />
