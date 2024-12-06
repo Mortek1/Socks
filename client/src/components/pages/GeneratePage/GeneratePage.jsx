@@ -29,7 +29,6 @@ export default function GeneratePage({ user }) {
     try {
       const endpoint = type === 'cart' ? '/generate/carts' : '/generate/favorites';
       await axiosInstance.post(endpoint, {
-        userId: user.data.id,
         color: bgColor,
         logo: uploadedImage,
       });

@@ -4,7 +4,9 @@ import Card from 'react-bootstrap/Card';
 import img from '../../../public/SOCKS.png';
 import texturaSock from '../pages/GeneratePage/texturaSock.avif'
 
-function CartComp({ cart }) {
+function CartComp({ cart, deleteHandler }) {
+  console.log(cart);
+  
   const handleShare = () => {
     const shareData = {
       title: 'Card Title',
@@ -29,13 +31,13 @@ function CartComp({ cart }) {
         <Card.Img  src={img} style={{
           // position: 'absolute',
           zIndex: 2,
-          backgroundColor: cart.color,
+          backgroundColor: cart.Sock.color,
           }}/>
         <Card.Img  src={texturaSock} style={{
           position: 'absolute',
           zIndex: 1,
         }}/>
-        <Card.Img  src={img} src={cart.logo} style={{
+        <Card.Img  src={cart.Sock.logo} style={{
           position: 'absolute',
           zIndex: 3,
           width: '40px',
@@ -50,7 +52,7 @@ function CartComp({ cart }) {
           <Card.Text>
             Это пример карточки, которую можно поделиться с другими.
           </Card.Text>
-          <Button variant="danger">Удалить</Button>
+          <Button variant="danger" onClick={() => deleteHandler(cart.Sock.id)}>Удалить</Button>
           <Button variant="primary" onClick={handleShare}>
             Поделиться
           </Button>

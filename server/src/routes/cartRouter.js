@@ -1,26 +1,39 @@
 const express = require('express');
-const { Sock } = require('../../db/models');
+const { Sock, Cart } = require('../../db/models');
+const verifyAccessToken = require('../middlewares/verifyAccessToken');
 
 const cartRouter = express.Router();
 
-cartRouter.get('/', async (req, res) => {
+cartRouter.get('/', verifyAccessToken, async (req, res) => {
   try {
-    const socks = await Sock.findAll();
-    res.json(socks);
+    const userId = res.locals.user.id; // Предполагается, что ID пользователя берется из авторизации
+console.log(userId)
+    const carts = await Cart.findAll({
+      where: { userId }, // Фильтруем по текущему пользователю
+      include: {
+        model: Sock, // Связь с моделью Sock
+        // attributes: ['image', 'logo', 'color'], // Выбираем только нужные поля
+      },
+    });
+    console.log(carts, '====================================================');
+    
+    res.json(carts);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-cartRouter.post('/', async (req, res) => {
+cartRouter.post('/', verifyAccessToken, async (req, res) => {
   const socks = new Sock({
     color: req.body.color,
-    userId: req.body.userId,
+    userId: res.locals.user.id,
     logo: req.body.logo,
   });
 
   try {
     const newSock = await socks.save();
+    console.log('----------------',newSock);
+    
     res.status(201).json(newSock);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -29,12 +42,13 @@ cartRouter.post('/', async (req, res) => {
 
 cartRouter.delete('/:id', async (req, res) => {
   try {
-    const socks = await Sock.findById(req.params.id);
+    const socks = await Sock.findByPk(req.params.id);
     if (!socks) return res.status(404).json({ message: 'Товар не найден' });
 
-    await socks.remove();
+    await socks.destroy();
     res.json({ message: 'Товар удален' });
   } catch (err) {
+    console.error(err)
     res.status(500).json({ message: err.message });
   }
 });

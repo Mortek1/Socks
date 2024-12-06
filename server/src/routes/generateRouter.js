@@ -22,29 +22,23 @@
 
 // module.exports = generatorRouter;
 
-
-
-
-
-
-
-
-
-
 const express = require('express');
 const { Sock, Cart, Favorite } = require('../../db/models');
+const verifyAccessToken = require('../middlewares/verifyAccessToken');
 
 const generatorRouter = express.Router();
 
-generatorRouter.post('/favorites', async (req, res) => {
+generatorRouter.post('/favorites',verifyAccessToken, async (req, res) => {
   try {
-    const { userId, color, logo } = req.body;
+    const { color, logo } = req.body;
 
-    if (!userId || !color || !logo) {
-      return res.status(400).json({ message: 'Все поля должны быть заполнены' });
+    if (!color || !logo) {
+      return res
+        .status(400)
+        .json({ message: 'Все поля должны быть заполнены' });
     }
-    const newSock = await Sock.create({ userId, color, logo });
-    const newFavorite = await Favorite.create({sockId: newSock.id, userId});
+    const newSock = await Sock.create({ userId: res.locals.user.id, color, logo });
+    const newFavorite = await Favorite.create({ sockId: newSock.id, userId: res.locals.user.id });
     res.status(201).json(newFavorite);
   } catch (error) {
     console.error('Ошибка при добавлении в избранное:', error);
@@ -52,46 +46,20 @@ generatorRouter.post('/favorites', async (req, res) => {
   }
 });
 
-
-
-
-
-
-
-
-
-
-
-// временно убрали
-
-// generatorRouter.post('/favorites', async (req, res) => {
-//   try {
-//     const { userId, color, logo } = req.body;
-
-//     if (!userId || !color || !logo) {
-//       return res.status(400).json({ message: 'Все поля должны быть заполнены' });
-//     }
-//     const newFavoriteSock = await Sock.create({ userId, color, logo });
-//     res.status(201).json(newFavoriteSock);
-//   } catch (error) {
-//     console.error('Ошибка при добавлении в избранное:', error);
-//     res.status(500).json({ message: 'Ошибка сервера' });
-//   }
-// });
-
-// Добавление носков в корзину
-generatorRouter.post('/carts', async (req, res) => {
+generatorRouter.post('/carts', verifyAccessToken, async (req, res) => {
   try {
-    const { userId, color, logo } = req.body;
+    const { color, logo } = req.body;
 
-    if (!userId || !color || !logo) {
-      return res.status(400).json({ message: 'Все поля должны быть заполнены' });
+    if ( !color || !logo) {
+      return res
+        .status(400)
+        .json({ message: 'Все поля должны быть заполнены' });
     }
-
-    const newCartSock = await Sock.create({ userId, color, logo });
-    res.status(201).json(newCartSock);
+    const newSock = await Sock.create({ userId: res.locals.user.id, color, logo });
+    const newCart = await Cart.create({ sockId: newSock.id, userId: res.locals.user.id });
+    res.status(201).json(newCart);
   } catch (error) {
-    console.error('Ошибка при добавлении в корзину:', error);
+    console.error('Ошибка при добавлении в избранное:', error);
     res.status(500).json({ message: 'Ошибка сервера' });
   }
 });

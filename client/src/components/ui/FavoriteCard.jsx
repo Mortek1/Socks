@@ -3,8 +3,10 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import img from '../../../public/SOCKS.png';
 import texturaSock from '../pages/GeneratePage/texturaSock.avif'
+import axiosInstance from '../api/axiosInstance';
 
-function FavoriteCard({ favorite }) {
+function FavoriteCard({ favorite, deleteHandler }) {
+  console.log(favorite)
   const handleShare = () => {
     const shareData = {
       title: 'Card Title',
@@ -22,6 +24,8 @@ function FavoriteCard({ favorite }) {
     }
   };
 
+  
+
   return (
     <Col xs={3}>
       <Card style={{ width: '18rem'}}>
@@ -29,13 +33,13 @@ function FavoriteCard({ favorite }) {
         <Card.Img  src={img} style={{
           // position: 'absolute',
           zIndex: 2,
-          backgroundColor: favorite.color,
+          backgroundColor: favorite?.Sock?.color,
           }}/>
         <Card.Img  src={texturaSock} style={{
           position: 'absolute',
           zIndex: 1,
         }}/>
-        <Card.Img  src={img} src={favorite.logo} style={{
+        <Card.Img  src={img} src={favorite?.Sock?.logo} style={{
           position: 'absolute',
           zIndex: 3,
           width: '40px',
@@ -50,7 +54,7 @@ function FavoriteCard({ favorite }) {
           <Card.Text>
             Это пример карточки, которую можно поделиться с другими.
           </Card.Text>
-          <Button variant="danger">Удалить</Button>
+          <Button variant="danger" onClick={() => deleteHandler(favorite.id)}>Удалить</Button>
           <Button variant="primary" onClick={handleShare}>
             Поделиться
           </Button>
