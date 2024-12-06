@@ -34,12 +34,12 @@ export default function NavBar({ user, logoutHandler }) {
           )}
           {user.data && (
             <>
-              <NavLink to="/favorites" className="nav-link">
-                Избранное
-              </NavLink>
           <NavLink to="/generate" className="nav-link">
             Конструктор
           </NavLink>
+              <NavLink to="/favorites" className="nav-link">
+                Избранное
+              </NavLink>
             <NavLink to={`/carts`} className="nav-link">
               <FaShoppingCart size={24} />
             </NavLink>

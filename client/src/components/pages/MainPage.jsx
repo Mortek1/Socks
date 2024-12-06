@@ -28,7 +28,7 @@ export default function MainPage({ user }) {
                 ) : ( 
                   <> 
                     <p>Отлично, тебе наскучили обычные серые носки!?</p> 
-                    <NavLink to="/" className="nav-link"> 
+                    <NavLink to="/generate" className="nav-link" style={{color: 'blue'}}> 
                       Переходи сюда и создай свои носки с индивидуальным и ярким 
                       дизайном! 
                     </NavLink> 
