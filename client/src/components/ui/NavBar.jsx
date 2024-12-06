@@ -19,7 +19,7 @@ export default function NavBar({ user, logoutHandler }) {
           </NavLink>
         </Nav>
         {user.data && (
-          <NavLink to={`/cart`} className="nav-link">
+          <NavLink to={`/carts`} className="nav-link">
             <FaShoppingCart size={24} />
           </NavLink>
         )}
@@ -33,15 +33,17 @@ export default function NavBar({ user, logoutHandler }) {
                 Регистрация
               </NavLink>
               <span className="nav-link">|</span>
-              <NavLink to="/favorites" className="nav-link">
-                Избранное
-              </NavLink>
             </>
           )}
           {user.data && (
-            <NavLink to={`/cart`} className="nav-link">
+            <>
+              <NavLink to="/favorites" className="nav-link">
+                Избранное
+              </NavLink>
+            <NavLink to={`/carts`} className="nav-link">
               <FaShoppingCart size={24} />
             </NavLink>
+            </>
           )}
           <span className="nav-link">
             {user.data ? user.data.name : 'Гость'}
